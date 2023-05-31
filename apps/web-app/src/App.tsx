@@ -1,16 +1,17 @@
 import StyledDiv from "components";
+import { useQuotes, usePersonas } from "hooks";
 import "./App.css";
 
 function App() {
+	const { data } = useQuotes();
+	const { data: personas } = usePersonas();
+
+	console.log(personas);
+	console.log(data);
+
 	return (
 		<>
 			<StyledDiv>Hello</StyledDiv>
-			<div>Hello</div>
-			<div>Hello Button</div>
-			<div>New Div</div>
-			<div>New div</div>
-			<h1>Hello world</h1>
-			<h1>Hello world 1</h1>
 		</>
 	);
 }

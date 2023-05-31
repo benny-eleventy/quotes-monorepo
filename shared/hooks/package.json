@@ -1,0 +1,14 @@
+{
+	"name": "hooks",
+	"version": "1.0.0",
+	"packageManager": "yarn@3.4.1",
+	"peerDependencies": {
+		"@tanstack/react-query": "^4.29.12"
+	},
+	"devDependencies": {
+		"@tanstack/react-query": "^4.29.12"
+	},
+	"dependencies": {
+		"apis": "workspace:^"
+	}
+}

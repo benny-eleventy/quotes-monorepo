@@ -5,6 +5,7 @@ function App() {
 	return (
 		<>
 			<StyledDiv>Hello</StyledDiv>
+			<div>Hello</div>
 		</>
 	);
 }

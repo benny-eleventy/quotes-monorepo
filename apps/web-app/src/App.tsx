@@ -1,14 +1,10 @@
-import { StyledDiv } from "components";
-import { useQuotes, usePersonas } from "hooks";
 import "./App.css";
+import PersonaForm from "./components/persona-form";
 
 function App() {
-	const { data } = useQuotes();
-	const { data: personas } = usePersonas();
-
 	return (
 		<>
-			<StyledDiv>Hello</StyledDiv>
+			<PersonaForm />
 		</>
 	);
 }

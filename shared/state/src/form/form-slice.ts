@@ -1,14 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface PersonaFields {
-	name: string;
-	imageUrl: string;
-	age: number;
-}
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+import { Personas } from "@bennyui/quotes-types";
 
 interface QuotesFields {
 	quote: string;
 	persona: string;
+}
+
+interface PersonaFields {
+	name: string;
+	imageUrls: string[];
+	role: string;
 }
 
 export interface FormState {
@@ -20,7 +23,7 @@ export interface FormState {
 }
 
 type Entity = "persona" | "quotes";
-type PersonaField = "name" | "imageUrl" | "age";
+type PersonaField = "name" | "imageUrls" | "role";
 type QuotesField = "quote" | "persona";
 type Field = PersonaField | QuotesField;
 
@@ -28,9 +31,9 @@ const initialState: FormState = {
 	currentEntity: "none",
 	fields: {
 		persona: {
-			name: "persona",
-			imageUrl: "https://via.placeholder.com/150",
-			age: 0,
+			name: "",
+			imageUrls: [],
+			role: "Persona",
 		},
 		quotes: {
 			quote: "",
@@ -50,7 +53,6 @@ const formSlice = createSlice({
 			const { entity, field, value } = action.payload;
 			state.currentEntity = entity;
 			if (entity === "persona") {
-				//@ts-ignore
 				(state.fields[entity] as PersonaFields)[field as PersonaField] = value;
 			} else if (entity === "quotes") {
 				(state.fields[entity] as QuotesFields)[field as QuotesField] = value;
@@ -58,6 +60,14 @@ const formSlice = createSlice({
 		},
 	},
 });
+
+export const usePersonaFormFields = () => {
+	return useSelector((state: RootState) => state.form.fields.persona);
+};
+
+export const useQuotesFormFields = () => {
+	return useSelector((state: RootState) => state.form.fields.quotes);
+};
 
 export const { updateField } = formSlice.actions;
 

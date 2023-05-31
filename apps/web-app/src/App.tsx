@@ -10,6 +10,7 @@ function App() {
 			<div>New Div</div>
 			<div>New div</div>
 			<h1>Hello world</h1>
+			<h1>Hello world 1</h1>
 		</>
 	);
 }

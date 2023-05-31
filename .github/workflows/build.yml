@@ -38,8 +38,10 @@ jobs:
       - name: Build and test affected
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            HEAD_SHA=${{ github.event.pull_request.head.sha }}
+           HEAD_SHA=${{ github.event.pull_request.head.sha }}
+           BASE_SHA=${{ steps.get_sha.outputs.sha }}
           else
-            HEAD_SHA=${{ github.sha }}
+           HEAD_SHA=${{ github.sha }}
+           BASE_SHA=$(git rev-parse HEAD~1)
           fi
-          yarn nx affected --target=build --base=${{ steps.get_sha.outputs.sha }} --head=$HEAD_SHA
+           yarn nx affected --target=build --base=$BASE_SHA --head=$HEAD_SHA

@@ -1,11 +1,14 @@
 import { StyledInput, StyledButton } from "components";
 import { useDispatch } from "react-redux";
 import { updateField, usePersonaFormFields } from "state";
+import { useCreatePersona } from "hooks";
+import { addToastMessage } from "../state";
 
 const PersonaForm = () => {
 	const dispatch = useDispatch();
 
 	const persona = usePersonaFormFields();
+	const { createOne } = useCreatePersona();
 
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -13,6 +16,25 @@ const PersonaForm = () => {
 		const { name, value } = event.target;
 		//@ts-ignore
 		dispatch(updateField({ entity: "persona", field: name, value }));
+	};
+
+	const handleSubmit = async () => {
+		try {
+			createOne({ data: persona });
+			dispatch(
+				addToastMessage({
+					message: "Persona created successfully",
+					type: "success",
+				})
+			);
+		} catch (error) {
+			dispatch(
+				addToastMessage({
+					message: "An error occurred while creating the persona",
+					type: "error",
+				})
+			);
+		}
 	};
 
 	return (
@@ -57,7 +79,7 @@ const PersonaForm = () => {
 					placeholder="Role"
 				/>
 			</>
-			<StyledButton>Submit</StyledButton>
+			<StyledButton onClick={() => handleSubmit()}>Submit</StyledButton>
 		</div>
 	);
 };

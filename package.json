@@ -1,0 +1,19 @@
+{
+	"name": "quotes-monorepo",
+	"version": "0.0.0",
+	"license": "MIT",
+	"private": true,
+	"devDependencies": {
+		"nx": "16.2.2"
+	},
+	"workspaces": [
+		"packages/*",
+		"shared/*",
+		"apps/web-app"
+	],
+	"dependencies": {
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"typescript": "^4.9.5"
+	}
+}

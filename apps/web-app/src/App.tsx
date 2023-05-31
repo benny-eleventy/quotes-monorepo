@@ -7,6 +7,8 @@ function App() {
 			<StyledDiv>Hello</StyledDiv>
 			<div>Hello</div>
 			<div>Hello Button</div>
+			<div>New Div</div>
+			<div>New div</div>
 		</>
 	);
 }

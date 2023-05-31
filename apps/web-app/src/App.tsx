@@ -9,6 +9,7 @@ function App() {
 			<div>Hello Button</div>
 			<div>New Div</div>
 			<div>New div</div>
+			<h1>Hello world</h1>
 		</>
 	);
 }

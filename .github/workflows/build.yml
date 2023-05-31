@@ -1,0 +1,25 @@
+on:
+  pull_request:
+    branches:
+      - main
+
+name: CI
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build and test affected
+        run: yarn nx affected --target=build --base=origin/main --head=${{ github.event.pull_request.head.sha }} --prod

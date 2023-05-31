@@ -10,5 +10,8 @@
 	},
 	"dependencies": {
 		"apis": "workspace:^"
+	},
+	"scripts": {
+		"build": "echo 'Testing echo script in shared-components'"
 	}
 }

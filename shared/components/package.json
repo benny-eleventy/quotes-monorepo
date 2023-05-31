@@ -8,5 +8,9 @@
 	},
 	"devDependencies": {
 		"@types/styled-components": "^5.1.26"
+	},
+	"scripts": {
+		"build": "echo 'Testing echo script in shared-components'",
+		"test": "jest --watchAll"
 	}
 }

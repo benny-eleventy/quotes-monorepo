@@ -1,11 +1,13 @@
 import { StyledInput, StyledButton } from "components";
 import { useDispatch } from "react-redux";
 import { updateField, usePersonaFormFields } from "state";
+import { useCreatePersona } from "hooks";
 
 const PersonaForm = () => {
 	const dispatch = useDispatch();
 
 	const persona = usePersonaFormFields();
+	const { createOne } = useCreatePersona();
 
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -57,7 +59,13 @@ const PersonaForm = () => {
 					placeholder="Role"
 				/>
 			</>
-			<StyledButton>Submit</StyledButton>
+			<StyledButton
+				onClick={() => {
+					createOne({ data: persona });
+				}}
+			>
+				Submit
+			</StyledButton>
 		</div>
 	);
 };

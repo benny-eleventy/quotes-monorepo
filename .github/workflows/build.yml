@@ -16,10 +16,15 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v2
         with:
-          node-version: "16"
+          node-version: '16'
+
+      - name: Install Yarn
+        run: |
+          npm install -g yarn
+          yarn set version 3.4.1
 
       - name: Install dependencies
         run: yarn install
 
       - name: Build and test affected
-        run: yarn nx affected --target=build --base=origin/main --head=${{ github.event.pull_request.head.sha }} --prod
+        run: yarn nx affected --target=build --base=main --head=${{ github.event.pull_request.head.sha }}

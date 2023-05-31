@@ -1,5 +1,6 @@
 {
 	"name": "components",
+	"version": "1.0.0",
 	"packageManager": "yarn@3.4.1",
 	"dependencies": {
 		"react-is": "^18.2.0",

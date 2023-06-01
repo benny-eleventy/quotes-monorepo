@@ -5,6 +5,7 @@
 		"@bennyui/quotes-types": "^1.0.5",
 		"@reduxjs/toolkit": "^1.9.5",
 		"react-redux": "^8.0.7",
+		"vitest": "^0.31.4",
 		"zod": "^3.21.4"
 	},
 	"peerDependencies": {
@@ -12,5 +13,8 @@
 		"@reduxjs/toolkit": "^1.9.5",
 		"react-redux": "^8.0.7",
 		"zod": "^3.21.4"
+	},
+	"scripts": {
+		"test": "vitest"
 	}
 }

@@ -53,7 +53,12 @@ const formSlice = createSlice({
 			const { entity, field, value } = action.payload;
 			state.currentEntity = entity;
 			if (entity === "persona") {
-				(state.fields[entity] as PersonaFields)[field as PersonaField] = value;
+				if (field == "imageUrls") {
+					state.fields.persona.imageUrls.push(value);
+				} else {
+					(state.fields[entity] as PersonaFields)[field as PersonaField] =
+						value;
+				}
 			} else if (entity === "quotes") {
 				(state.fields[entity] as QuotesFields)[field as QuotesField] = value;
 			}

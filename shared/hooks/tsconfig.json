@@ -1,0 +1,8 @@
+{
+	"compilerOptions": {
+		"jsx": "react",
+		"types": ["jest"],
+		"lib": ["ES2020", "DOM", "DOM.Iterable"],
+		"esModuleInterop": true
+	}
+}

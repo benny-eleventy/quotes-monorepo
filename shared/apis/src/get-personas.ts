@@ -15,5 +15,6 @@ export const getPersonas = async () => {
 			},
 		}
 	);
+	console.log("getPersonas", response);
 	return response.data;
 };

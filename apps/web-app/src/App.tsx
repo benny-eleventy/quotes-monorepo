@@ -1,9 +1,8 @@
-import { usePersonas } from "hooks";
 import "./App.css";
 import PersonaForm from "./components/persona-form";
 import { ToastMessage } from "./components/toast-message";
 import { useUiState } from "./state";
-import { usePersonas } from "hooks";
+import { useGetAll, usePersonas } from "hooks";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setApiDetails } from "state";
@@ -23,8 +22,15 @@ function App() {
 
 		dispatch(setApiDetails(apiDetails));
 	}, [dispatch]);
-	const { data } = usePersonas();
-	console.log(data);
+
+	useGetAll({
+		entity: "personas",
+	});
+
+	useGetAll({
+		entity: "quotes",
+	});
+
 	return (
 		<>
 			<PersonaForm />

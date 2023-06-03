@@ -1,3 +1,4 @@
+import { usePersonas } from "hooks";
 import "./App.css";
 import PersonaForm from "./components/persona-form";
 import { ToastMessage } from "./components/toast-message";
@@ -22,7 +23,6 @@ function App() {
 
 		dispatch(setApiDetails(apiDetails));
 	}, [dispatch]);
-
 	const { data } = usePersonas();
 	console.log(data);
 	return (

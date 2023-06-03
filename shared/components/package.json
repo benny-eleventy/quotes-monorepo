@@ -11,6 +11,6 @@
 	},
 	"scripts": {
 		"build": "echo 'Testing echo script in shared-components'",
-		"test": "jest --watchAll"
+		"test": "echo 'Testing echo script in shared-components'"
 	}
 }

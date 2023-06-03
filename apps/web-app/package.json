@@ -13,6 +13,7 @@
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.5",
 		"@tanstack/react-query": "^4.29.12",
+		"apis": "workspace:^",
 		"components": "^1.0.0",
 		"hooks": "workspace:^",
 		"react": "^18.2.0",

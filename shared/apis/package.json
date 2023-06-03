@@ -2,6 +2,11 @@
 	"name": "apis",
 	"packageManager": "yarn@3.4.1",
 	"dependencies": {
-		"axios": "^1.4.0"
+		"axios": "^1.4.0",
+		"state": "workspace:^"
+	},
+	"devDependencies": {
+		"@types/react": "^18.2.8",
+		"react": "^18.2.0"
 	}
 }

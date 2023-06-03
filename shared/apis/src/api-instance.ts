@@ -1,8 +1,10 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
+import { useGlobalState } from "state";
 
-const instance = axios.create({
-	baseURL: "https://antilibrary-uat.deno.dev", // replace with your actual base URL
-	// any other settings
-});
-
-export default instance;
+export const useApiInstance = () => {
+	const { apiDetails } = useGlobalState();
+	return axios.create({
+		baseURL: apiDetails?.baseURL,
+		headers: apiDetails?.headers,
+	});
+};

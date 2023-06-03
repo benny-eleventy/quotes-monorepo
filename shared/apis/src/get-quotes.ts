@@ -1,7 +1,17 @@
-import api from "./api-instance";
+import { AxiosInstance } from "axios";
+import { useApiInstance } from "./api-instance";
 
-export const getQuotes = async () => {
-	const response = await api.post("/get/quotes", {
+interface getPersonasParams {
+	apiDetails: {
+		baseURL: string;
+		headers: any;
+	} | null;
+}
+
+export const getQuotes = async ({ apiDetails }: getPersonasParams) => {
+	const api = useApiInstance();
+
+	const response = await api.post("/get/personas", {
 		pagination: {
 			page: "1",
 		},

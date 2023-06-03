@@ -1,12 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { getPersonas } from "apis";
+import { useGetPersonas } from "apis";
+import { useGlobalState } from "state";
 
 function usePersonas() {
-	console.log("usePersonas");
+	const { apiDetails } = useGlobalState();
+	const getPersonas = useGetPersonas();
 	return useQuery({
 		queryKey: ["personas"],
-		queryFn: getPersonas,
+		queryFn: () => getPersonas(),
+		enabled: !!apiDetails,
 	});
 }
 

@@ -4,6 +4,7 @@
 	"license": "MIT",
 	"private": true,
 	"devDependencies": {
+		"@types/react": "^18.2.8",
 		"nx": "16.2.2"
 	},
 	"workspaces": [

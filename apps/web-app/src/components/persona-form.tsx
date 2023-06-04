@@ -1,6 +1,6 @@
 import { s } from "@bennyui/core";
 import { useQueryClient } from "@tanstack/react-query";
-import { useCreateOne } from "hooks";
+import { useCreateOne, useUpdateOne } from "hooks";
 import { useDispatch } from "react-redux";
 import { updateField, usePersonaFormFields } from "state";
 import { addToastMessage } from "../state";
@@ -44,8 +44,36 @@ const PersonaForm = () => {
 		onCreateError,
 	});
 
+	const onUpdateSuccess = (_data: any) => {
+		queryClient.invalidateQueries({ queryKey: ["personas"] });
+		dispatch(
+			addToastMessage({
+				message: "Persona updated successfully",
+				type: "success",
+			})
+		);
+	};
+
+	const onUpdateError = (_error: any) => {
+		dispatch(
+			addToastMessage({
+				message: "An error occurred while updating the persona",
+				type: "error",
+			})
+		);
+	};
+
+	const { updateOne } = useUpdateOne({
+		onUpdateSuccess,
+		onUpdateError,
+	});
+
 	const handleSubmit = async () => {
-		createOne({ body: persona, entity: "persona" });
+		if (persona._id) {
+			updateOne({ body: persona, entity: "persona", _id: persona._id });
+		} else {
+			createOne({ body: persona, entity: "persona" });
+		}
 	};
 
 	return (

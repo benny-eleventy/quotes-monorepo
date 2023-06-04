@@ -1,9 +1,10 @@
-import { useGlobalState } from "state";
+import { loadFormData, useGlobalState } from "state";
 import {
 	CenterAlignedColumnContainer,
+	CenterAlignedRowContainer,
 	WrappedFlexStartRowContainer,
 } from "@bennyui/core";
-import { useDeleteOne } from "hooks";
+import { useDeleteOne, useUpdateOne } from "hooks";
 import { useDispatch } from "react-redux";
 import { useQueryClient } from "@tanstack/react-query";
 import { addToastMessage } from "../state";
@@ -43,9 +44,23 @@ const Personas = () => {
 		deleteOne({ entity: "persona", _id });
 	};
 
+	const handleUpdate = ({
+		persona,
+	}: {
+		persona: { _id: string; name: string; description: string };
+	}) => {
+		dispatch(
+			loadFormData({
+				entity: "persona",
+				data: persona,
+			})
+		);
+	};
+
 	return (
 		<WrappedFlexStartRowContainer
 			style={{
+				width: "100%",
 				height: "auto",
 			}}
 		>
@@ -58,15 +73,46 @@ const Personas = () => {
 								margin: "0.5rem",
 								padding: "0.2rem",
 								height: "auto",
-								width: "200px",
+								width: "240px",
 								color: "black",
+								position: "relative",
 							}}
 							key={persona._id}
-							onClick={() => {
-								console.log("clicked");
-								handleRemove({ _id: persona._id });
-							}}
 						>
+							<CenterAlignedRowContainer
+								style={{
+									position: "absolute",
+									top: "0",
+									right: "0",
+									margin: "0.5rem",
+									border: "none",
+								}}
+							>
+								<CenterAlignedColumnContainer
+									style={{
+										background: "yellow",
+										borderRadius: "50%",
+										width: "24px",
+										aspectRatio: "1/1",
+									}}
+									onClick={() => {
+										console.log("clicked");
+										handleUpdate({ persona });
+									}}
+								></CenterAlignedColumnContainer>
+								<CenterAlignedColumnContainer
+									style={{
+										background: "pink",
+										borderRadius: "50%",
+										width: "24px",
+										aspectRatio: "1/1",
+									}}
+									onClick={() => {
+										console.log("clicked");
+										handleRemove({ _id: persona._id });
+									}}
+								></CenterAlignedColumnContainer>
+							</CenterAlignedRowContainer>
 							<h3>{persona.name}</h3>
 						</CenterAlignedColumnContainer>
 					);

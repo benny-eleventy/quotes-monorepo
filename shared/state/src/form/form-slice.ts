@@ -8,6 +8,7 @@ interface QuotesFields {
 }
 
 interface PersonaFields {
+	_id?: string;
 	name: string;
 	imageUrls: string[];
 	role: string;
@@ -30,6 +31,7 @@ const initialState: FormState = {
 	currentEntity: "none",
 	fields: {
 		persona: {
+			_id: "",
 			name: "",
 			imageUrls: [],
 			role: "Persona",
@@ -62,6 +64,18 @@ const formSlice = createSlice({
 				(state.fields[entity] as QuotesFields)[field as QuotesField] = value;
 			}
 		},
+		loadFormData: (
+			state,
+			action: PayloadAction<{
+				entity: Entity;
+				data: PersonaFields | QuotesFields;
+			}>
+		) => {
+			const { entity, data } = action.payload;
+			const currentEntity = (state.currentEntity = entity);
+			// @ts-ignore
+			state.fields[currentEntity] = data;
+		},
 	},
 });
 
@@ -73,6 +87,6 @@ export const useQuotesFormFields = () => {
 	return useSelector((state: RootState) => state.form.fields.quotes);
 };
 
-export const { updateField } = formSlice.actions;
+export const { updateField, loadFormData } = formSlice.actions;
 
 export const formReducer = formSlice.reducer;

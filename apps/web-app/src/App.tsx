@@ -2,10 +2,12 @@ import "./App.css";
 import PersonaForm from "./components/persona-form";
 import { ToastMessage } from "./components/toast-message";
 import { useUiState } from "./state";
-import { useGetAll, usePersonas } from "hooks";
+import { useGetAll } from "hooks";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setApiDetails } from "state";
+import Personas from "./components/personas";
+
 function App() {
 	const { toastMessages } = useUiState();
 
@@ -33,6 +35,7 @@ function App() {
 
 	return (
 		<>
+			<Personas />
 			<PersonaForm />
 			{toastMessages?.length > 0 && <ToastMessage />}
 		</>

@@ -30,7 +30,13 @@ export interface globalState {
 }
 
 const initialState: globalState = {
-	apiDetails: null,
+	apiDetails: {
+		baseURL: "https://antilibrary-uat.deno.dev",
+		headers: {
+			"Content-Type": "application/json",
+			"X-App-Source": "QUOTES-WEB-APP",
+		},
+	},
 	appData: {
 		personas: [],
 		quotes: [],

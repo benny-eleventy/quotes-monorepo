@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { Personas } from "@bennyui/quotes-types";
 
 interface QuotesFields {
 	quote: string;

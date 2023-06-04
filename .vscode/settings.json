@@ -1,11 +1,11 @@
 {
-	"search.exclude": {
-		"**/.yarn": true,
-		"**/.pnp.*": true
-	},
-	"typescript.tsdk": ".yarn/sdks/typescript/lib",
-	"typescript.enablePromptUseWorkspaceTsdk": true,
-	"vitest.commandLine": "yarn vitest",
-	"jest.jestCommandLine": "yarn jest",
-	"jest.rootPath": "."
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "vitest.commandLine": "yarn vitest",
+  "jest.jestCommandLine": "yarn jest",
+  "jest.rootPath": "."
 }

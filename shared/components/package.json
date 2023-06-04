@@ -2,12 +2,14 @@
 	"name": "components",
 	"version": "1.0.0",
 	"packageManager": "yarn@3.4.1",
-	"dependencies": {
+	"devDependencies": {
+		"@types/styled-components": "^5.1.26",
 		"react-is": "^18.2.0",
 		"styled-components": "5.3.6"
 	},
-	"devDependencies": {
-		"@types/styled-components": "^5.1.26"
+	"peerDependencies": {
+		"react-is": "^18.2.0",
+		"styled-components": "5.3.6"
 	},
 	"scripts": {
 		"build": "echo 'Testing echo script in shared-components'",

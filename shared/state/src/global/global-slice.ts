@@ -21,7 +21,8 @@ export type Entities =
 	| "personas"
 	| "books"
 	| "quotes"
-	| "videos";
+	| "videos"
+	| "persona";
 
 export interface globalState {
 	apiDetails: ApiDetails | null;
@@ -49,7 +50,6 @@ const globalSlice = createSlice({
 			state.apiDetails = action.payload;
 		},
 		setAppData: (state, action: PayloadAction<SetAppDataPayload>) => {
-			console.log("action", action);
 			const { entity, data } = action.payload;
 			if (state.appData) {
 				state.appData[entity as keyof typeof state.appData] = data;

@@ -8,8 +8,6 @@ export const ToastMessage = () => {
 		dispatch(removeToastMessage(id));
 	};
 
-	console.log(toastMessages);
-
 	return (
 		<div
 			style={{

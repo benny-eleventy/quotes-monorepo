@@ -9,6 +9,7 @@ interface createPersonaOptions {
 
 export const useCreatePersona = () => {
 	const createPersona = useCreatePersonaAPI();
+
 	const mutation = useMutation((personaData: createPersonaOptions) =>
 		createPersona(personaData)
 	);

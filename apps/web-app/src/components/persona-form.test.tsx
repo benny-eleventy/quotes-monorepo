@@ -1,4 +1,3 @@
-import * as React from "react";
 import { fireEvent, render } from "../../tests/test-utils";
 import PersonaForm from "./persona-form";
 

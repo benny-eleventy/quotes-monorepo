@@ -9,6 +9,7 @@ export const useGetPersonas = () => {
 				page: "1",
 			},
 		});
+		console.log(response);
 		return response.data;
 	};
 

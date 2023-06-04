@@ -4,6 +4,9 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { usePersonas } from "../use-personas";
 import React from "react";
+import { Provider } from "react-redux";
+import { store } from "state";
+import { useGetAll } from "../use-get-all";
 
 const server = setupServer(
 	rest.post(
@@ -45,23 +48,31 @@ afterAll(() => server.close());
 
 test("usePersonas performs the query and returns data", async () => {
 	const wrapper = ({ children }) => (
-		<QueryClientProvider
-			client={
-				new QueryClient({
-					defaultOptions: {
-						queries: {
-							// ✅ turns retries off
-							retry: false,
+		<Provider store={store}>
+			<QueryClientProvider
+				client={
+					new QueryClient({
+						defaultOptions: {
+							queries: {
+								retry: false,
+							},
 						},
-					},
-				})
-			}
-		>
-			{children}
-		</QueryClientProvider>
+					})
+				}
+			>
+				{children}
+			</QueryClientProvider>
+		</Provider>
 	);
 
-	const { result } = renderHook(() => usePersonas(), { wrapper });
+	const { result } = renderHook(
+		() =>
+			useGetAll({
+				entity: "personas",
+			}),
+		{ wrapper }
+	);
+	console.log(result.current);
 
 	await waitFor(() => expect(result.current.isSuccess).toBe(true));
 

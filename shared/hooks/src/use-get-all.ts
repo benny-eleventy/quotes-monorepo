@@ -7,11 +7,12 @@ import { Entities, setAppData, useGlobalState } from "state";
 
 function useGetAll({ entity }: { entity: Entities }) {
 	const { apiDetails } = useGlobalState();
+
 	const dispatch = useDispatch();
 
 	const getAll = useGetAllAPI();
 
-	const { data, status, error } = useQuery({
+	const { data, status, error, isLoading, isError, isSuccess } = useQuery({
 		queryKey: [entity],
 		queryFn: () => getAll({ entity }),
 		enabled: !!apiDetails,
@@ -24,7 +25,7 @@ function useGetAll({ entity }: { entity: Entities }) {
 		}
 	}, [data, entity]);
 
-	return { data, status, error };
+	return { data, status, error, isLoading, isError, isSuccess };
 }
 
 export { useGetAll };

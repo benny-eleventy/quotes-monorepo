@@ -1,5 +1,4 @@
-import { describe, expect, it } from "vitest";
-import { fireEvent, getByText, render } from "../../tests/test-utils";
+import { fireEvent, render } from "../../tests/test-utils";
 import PersonaForm from "./persona-form";
 
 describe("PersonaForm", () => {
@@ -25,7 +24,7 @@ describe("PersonaForm", () => {
 		expect(getByPlaceholderText("Name")).toHaveValue("Test Name");
 		expect(getByPlaceholderText("Role")).toHaveValue("Test Role");
 
-		// const submitButton = getByText("Submit");
-		// expect(submitButton).toBeInTheDocument();
+		const submitButton = getByText("Submit");
+		expect(submitButton).toBeInTheDocument();
 	});
 });

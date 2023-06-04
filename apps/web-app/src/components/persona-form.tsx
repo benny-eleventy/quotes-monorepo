@@ -1,6 +1,6 @@
 import { s } from "@bennyui/core";
 import { useQueryClient } from "@tanstack/react-query";
-import { useCreate } from "hooks";
+import { useCreateOne } from "hooks";
 import { useDispatch } from "react-redux";
 import { updateField, usePersonaFormFields } from "state";
 import { addToastMessage } from "../state";
@@ -20,7 +20,7 @@ const PersonaForm = () => {
 
 	const queryClient = useQueryClient();
 
-	const onSuccess = (_data: any) => {
+	const onCreateSuccess = (_data: any) => {
 		queryClient.invalidateQueries({ queryKey: ["personas"] });
 		dispatch(
 			addToastMessage({
@@ -30,7 +30,7 @@ const PersonaForm = () => {
 		);
 	};
 
-	const onError = (_error: any) => {
+	const onCreateError = (_error: any) => {
 		dispatch(
 			addToastMessage({
 				message: "An error occurred while creating the persona",
@@ -39,9 +39,9 @@ const PersonaForm = () => {
 		);
 	};
 
-	const { mutate: createOne } = useCreate({
-		onSuccess,
-		onError,
+	const { createOne } = useCreateOne({
+		onCreateSuccess,
+		onCreateError,
 	});
 
 	const handleSubmit = async () => {

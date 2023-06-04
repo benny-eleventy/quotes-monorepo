@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@tanstack/react-query";
-import { Entities, RootState } from "state";
+import { Entities } from "state";
 import { useApiInstance } from "apis";
-import { useSelector } from "react-redux";
 
 interface MutationInput {
 	body: any;
@@ -10,12 +9,14 @@ interface MutationInput {
 }
 
 interface UseCreateOptions {
-	onSuccess?: (data: any) => void;
-	onError?: (error: any) => void;
+	onCreateSuccess?: (data: any) => void;
+	onCreateError?: (error: any) => void;
 }
 
-export const useCreate = ({ onSuccess, onError }: UseCreateOptions) => {
-	const { apiDetails } = useSelector((state: RootState) => state.global);
+export const useCreateOne = ({
+	onCreateSuccess,
+	onCreateError,
+}: UseCreateOptions) => {
 	const api = useApiInstance();
 
 	const createOne = async ({ entity, body }: MutationInput) => {
@@ -23,17 +24,22 @@ export const useCreate = ({ onSuccess, onError }: UseCreateOptions) => {
 		return response.data;
 	};
 
-	return useMutation<any, unknown, MutationInput>({
+	const { mutate: deleteOneMutation, ...rest } = useMutation<
+		any,
+		unknown,
+		MutationInput
+	>({
 		mutationFn: ({ body, entity }) => createOne({ entity, body }),
 		onSuccess: (data) => {
-			if (onSuccess) {
-				onSuccess(data);
+			if (onCreateSuccess) {
+				onCreateSuccess(data);
 			}
 		},
 		onError: (error) => {
-			if (onError) {
-				onError(error);
+			if (onCreateError) {
+				onCreateError(error);
 			}
 		},
 	});
+	return { createOne: deleteOneMutation, ...rest };
 };

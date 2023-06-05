@@ -5257,6 +5257,7 @@ __metadata:
     babel-jest: ^29.5.0
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
+    jest-mock-axios: ^4.7.2
     msw: ^1.2.1
     react: ^18.2.0
     react-redux: ^8.0.7
@@ -6059,6 +6060,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jest-mock-axios@npm:^4.7.2":
+  version: 4.7.2
+  resolution: "jest-mock-axios@npm:4.7.2"
+  dependencies:
+    "@jest/globals": ^29.5.0
+    jest: ~29.5.0
+    synchronous-promise: ^2.0.17
+  checksum: 8040f3b9d8ecf40b811f39d82d8754ba49183e158010a68783862d4b936364954248fe831c9951443f6666797caa9f76911d2a2de1f84d23957edc89c908c025
+  languageName: node
+  linkType: hard
+
 "jest-mock@npm:^29.5.0":
   version: 29.5.0
   resolution: "jest-mock@npm:29.5.0"
@@ -6262,7 +6274,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:^29.5.0":
+"jest@npm:^29.5.0, jest@npm:~29.5.0":
   version: 29.5.0
   resolution: "jest@npm:29.5.0"
   dependencies:
@@ -8485,6 +8497,13 @@ __metadata:
   version: 3.2.4
   resolution: "symbol-tree@npm:3.2.4"
   checksum: 6e8fc7e1486b8b54bea91199d9535bb72f10842e40c79e882fc94fb7b14b89866adf2fd79efa5ebb5b658bc07fb459ccce5ac0e99ef3d72f474e74aaf284029d
+  languageName: node
+  linkType: hard
+
+"synchronous-promise@npm:^2.0.17":
+  version: 2.0.17
+  resolution: "synchronous-promise@npm:2.0.17"
+  checksum: 7b1342c93741f3f92ebde1edf5d6ce8dde2278de948d84e9bd85e232c16c0d77c90c4940f9975be3effcb20f047cfb0f16fa311c3b4e092c22f3bf2889fb0fb4
   languageName: node
   linkType: hard
 

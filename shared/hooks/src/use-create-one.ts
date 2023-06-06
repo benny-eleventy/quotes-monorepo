@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@tanstack/react-query";
-import { Entities } from "state";
+import { useDispatch } from "react-redux";
+
+import { clearForm, Entities } from "state";
 import { useApiInstance } from "apis";
 
 interface MutationInput {
@@ -18,6 +20,7 @@ export const useCreateOne = ({
 	onCreateError,
 }: UseCreateOptions) => {
 	const api = useApiInstance();
+	const dispatch = useDispatch();
 
 	const createOne = async ({ entity, body }: MutationInput) => {
 		const response = await api.post(`/create/${entity}`, body);
@@ -32,10 +35,12 @@ export const useCreateOne = ({
 		mutationFn: ({ body, entity }) => createOne({ entity, body }),
 		onSuccess: (data) => {
 			if (onCreateSuccess) {
+				dispatch(clearForm());
 				onCreateSuccess(data);
 			}
 		},
 		onError: (error) => {
+			console.log(error, "send this to sentry");
 			if (onCreateError) {
 				onCreateError(error);
 			}

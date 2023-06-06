@@ -1,5 +1,5 @@
 import "./App.css";
-import PersonaForm from "./components/persona-form";
+import { PersonaForm } from "./components/persona-form";
 import { ToastMessage } from "./components/toast-message";
 import { useUiState } from "./state";
 import { useGetAll } from "hooks";

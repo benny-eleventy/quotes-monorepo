@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@tanstack/react-query";
-import { Entities } from "state";
+import { clearForm, Entities } from "state";
 import { useApiInstance } from "apis";
+import { useDispatch } from "react-redux";
 
 interface MutationInput {
 	_id: string | number;
@@ -19,6 +20,7 @@ export const useUpdateOne = ({
 	onUpdateError,
 }: UseUpdateOptions) => {
 	const api = useApiInstance();
+	const dispatch = useDispatch();
 
 	const updateOne = async ({ entity, _id, body }: MutationInput) => {
 		const response = await api.patch(`/update/${entity}/${_id}`, body);
@@ -33,6 +35,7 @@ export const useUpdateOne = ({
 		mutationFn: ({ _id, entity, body }) => updateOne({ entity, _id, body }),
 		onSuccess: (data) => {
 			if (onUpdateError) {
+				dispatch(clearForm());
 				onUpdateSuccess(data);
 			}
 		},

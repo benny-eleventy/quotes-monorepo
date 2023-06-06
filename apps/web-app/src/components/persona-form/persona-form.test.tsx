@@ -1,5 +1,5 @@
-import { fireEvent, render } from "../../tests/test-utils";
-import PersonaForm from "./persona-form";
+import { fireEvent, render } from "../../../tests/test-utils";
+import { PersonaForm } from "./persona-form";
 
 describe("PersonaForm", () => {
 	it("renders without crashing", () => {

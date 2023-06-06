@@ -6,7 +6,7 @@ import { setFormStatus } from "state";
 import { useCreateOne, useUpdateOne } from "hooks";
 import { addToastMessage } from "../../state";
 
-export const usePersonaFormActions = () => {
+export const usePersonaFormHandlers = () => {
 	const dispatch = useDispatch();
 	const queryClient = useQueryClient();
 
@@ -79,18 +79,10 @@ export const usePersonaFormActions = () => {
 		);
 	};
 
-	const { createOne } = useCreateOne({
-		onCreateSuccess,
-		onCreateError,
-	});
-
-	const { updateOne } = useUpdateOne({
-		onUpdateSuccess,
-		onUpdateError,
-	});
-
 	return {
-		createOne,
-		updateOne,
+		onCreateError,
+		onCreateSuccess,
+		onUpdateError,
+		onUpdateSuccess,
 	};
 };

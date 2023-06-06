@@ -1,10 +1,7 @@
 import { useDispatch } from "react-redux";
-import { CenterAlignedColumnContainer, s, styled } from "@bennyui/core";
-import { z } from "zod";
+import { CenterAlignedColumnContainer, styled } from "@bennyui/core";
 import {
 	setFieldError,
-	setFormStatus,
-	setMultipleFieldErrors,
 	updateField,
 	useFormStatus,
 	usePersonaFormErrors,
@@ -12,16 +9,13 @@ import {
 } from "state";
 import { personaSchema } from "state";
 import InputBox from "../input-box";
-import { usePersonaFormActions } from "./use-persona-form-actions";
 
 const PersonaForm = () => {
 	const dispatch = useDispatch();
 
 	const persona = usePersonaFormFields();
-	const { isValidating, isSuccess, isError, isLoading } = useFormStatus();
+	const { isValidating } = useFormStatus();
 	const personaFormErrors = usePersonaFormErrors();
-
-	const { createOne, updateOne } = usePersonaFormActions();
 
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -36,7 +30,6 @@ const PersonaForm = () => {
 				.safeParse({ [name]: value });
 
 			if (result.success) {
-				// If validation succeeds, update the field and clear any errors
 				dispatch(
 					setFieldError({
 						entity: "persona",
@@ -51,43 +44,6 @@ const PersonaForm = () => {
 				dispatch(
 					//@ts-ignore
 					setFieldError({ entity: "persona", field: name, errorMessage })
-				);
-			}
-		}
-	};
-
-	const handleSubmit = async () => {
-		try {
-			// dispatch(setValidating(true));
-			dispatch(
-				setFormStatus({
-					isLoading: true,
-					isValidating: true,
-				})
-			);
-			const _persona = await personaSchema.parseAsync(persona);
-			if (persona._id) {
-				updateOne({ body: persona, entity: "persona", _id: persona._id });
-			} else {
-				createOne({ body: persona, entity: "persona" });
-			}
-		} catch (error) {
-			dispatch(setFormStatus({ isLoading: false }));
-
-			if (error instanceof z.ZodError) {
-				//TODO: handle zod errors
-				const errorMessages: Record<string, string[]> = {};
-				for (const issue of error.issues) {
-					const field = issue.path[0];
-					if (field) {
-						if (!errorMessages[field]) {
-							errorMessages[field] = [];
-						}
-						errorMessages[field].push(issue.message);
-					}
-				}
-				dispatch(
-					setMultipleFieldErrors({ entity: "persona", errors: errorMessages })
 				);
 			}
 		}
@@ -121,16 +77,6 @@ const PersonaForm = () => {
 				isError={!!personaFormErrors.role}
 				errorMessage={personaFormErrors.role?.[0]}
 			/>
-
-			<SubmitButton onClick={() => handleSubmit()}>
-				{isLoading
-					? "Loading..."
-					: isSuccess
-					? "Success!"
-					: isError
-					? "Error!"
-					: "Submit"}
-			</SubmitButton>
 		</FormWrapper>
 	);
 };
@@ -146,12 +92,4 @@ const FormWrapper = styled(CenterAlignedColumnContainer)`
 	gap: 1rem;
 	border: 1px solid white;
 	padding: 2rem;
-`;
-
-const SubmitButton = styled(s.Button)`
-	width: 80%;
-	border: 1px solid rgba(255, 255, 255, 0.4);
-	background: lightpink;
-	color: black;
-	padding: 1rem;
 `;

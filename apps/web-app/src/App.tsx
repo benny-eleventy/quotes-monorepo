@@ -5,8 +5,10 @@ import { useUiState } from "./state";
 import { useGetAll } from "hooks";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { setApiDetails } from "state";
+import { setApiDetails, setDataStatus } from "state";
 import Personas from "./components/personas";
+import { FlexStartRowContainer } from "@bennyui/core";
+import React from "react";
 
 function App() {
 	const { toastMessages } = useUiState();
@@ -25,18 +27,37 @@ function App() {
 		dispatch(setApiDetails(apiDetails));
 	}, [dispatch]);
 
-	useGetAll({
+	const {
+		isLoading: isLoadingPersonas,
+		isSuccess: isSuccessPersonas,
+		isError: isErrorPersonas,
+	} = useGetAll({
 		entity: "personas",
 	});
 
-	useGetAll({
+	React.useEffect(() => {
+		dispatch(
+			setDataStatus({
+				entity: "personas",
+				status: {
+					isLoading: isLoadingPersonas,
+					isSuccess: isSuccessPersonas,
+					isError: isErrorPersonas,
+				},
+			})
+		);
+	}, [isLoadingPersonas]);
+
+	const { isLoading: isLoadingQuotes } = useGetAll({
 		entity: "quotes",
 	});
 
 	return (
 		<>
-			<Personas />
-			<PersonaForm />
+			<FlexStartRowContainer width="100%" height="auto">
+				<Personas />
+				{/* <PersonaForm /> */}
+			</FlexStartRowContainer>
 			{toastMessages?.length > 0 && <ToastMessage />}
 		</>
 	);

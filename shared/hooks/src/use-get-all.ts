@@ -6,21 +6,23 @@ import { useGetAllAPI } from "apis";
 import { Entities, setAppData, useGlobalState } from "state";
 
 function useGetAll({ entity }: { entity: Entities }) {
-	const { apiDetails } = useGlobalState();
+	const { apiDetails, appData } = useGlobalState();
 
 	const dispatch = useDispatch();
 
 	const getAll = useGetAllAPI();
 
+	const page = appData[entity].pagination.currentPage;
+
 	const { data, status, error, isLoading, isError, isSuccess } = useQuery({
-		queryKey: [entity],
-		queryFn: () => getAll({ entity }),
+		queryKey: [entity, page],
+		queryFn: () => getAll({ entity, page }),
 		enabled: !!apiDetails,
 	});
 
 	React.useEffect(() => {
 		if (data) {
-			dispatch(setAppData({ entity, data: data.results }));
+			dispatch(setAppData({ entity, data }));
 			//TODO: Error handling to be performed here - Global Error Handling
 		}
 	}, [data, entity]);

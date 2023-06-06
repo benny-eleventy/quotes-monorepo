@@ -7,32 +7,33 @@ import { useApiInstance } from "apis";
 
 interface MutationInput {
 	body: any;
-	entity: Entities;
 }
 
 interface UseCreateOptions {
 	onCreateSuccess?: (data: any) => void;
 	onCreateError?: (error: any) => void;
+	entity?: Entities;
 }
 
 export const useCreateOne = ({
 	onCreateSuccess,
 	onCreateError,
+	entity,
 }: UseCreateOptions) => {
 	const api = useApiInstance();
 	const dispatch = useDispatch();
 
-	const createOne = async ({ entity, body }: MutationInput) => {
+	const createOneAPI = async ({ body }: MutationInput) => {
 		const response = await api.post(`/create/${entity}`, body);
 		return response.data;
 	};
 
-	const { mutate: deleteOneMutation, ...rest } = useMutation<
+	const { mutate: createOne, ...rest } = useMutation<
 		any,
 		unknown,
 		MutationInput
 	>({
-		mutationFn: ({ body, entity }) => createOne({ entity, body }),
+		mutationFn: ({ body }) => createOneAPI({ body }),
 		onSuccess: (data) => {
 			if (onCreateSuccess) {
 				dispatch(clearForm());
@@ -46,5 +47,5 @@ export const useCreateOne = ({
 			}
 		},
 	});
-	return { createOne: deleteOneMutation, ...rest };
+	return { createOne, ...rest };
 };

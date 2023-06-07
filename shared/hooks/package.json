@@ -26,8 +26,8 @@
 		"ts-jest": "^29.1.0"
 	},
 	"dependencies": {
-		"apis": "workspace:^",
-		"state": "workspace:^"
+		"apis": "^1.0.0",
+		"state": "^1.0.0"
 	},
 	"scripts": {
 		"build": "echo 'Testing echo script in shared-components'",

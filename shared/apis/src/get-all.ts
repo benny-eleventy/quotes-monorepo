@@ -14,7 +14,7 @@ export const useGetAllAPI = () => {
 		const response = await api.post(`/get/${entity}`, {
 			pagination: {
 				page,
-				limit: 2,
+				limit: 10,
 			},
 		});
 		return response.data;

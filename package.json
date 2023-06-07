@@ -12,7 +12,8 @@
 	"workspaces": [
 		"packages/*",
 		"shared/*",
-		"apps/web-app"
+		"apps/web-app",
+		"apps/quotesApp"
 	],
 	"dependencies": {
 		"jsdom": "^22.1.0",
@@ -24,5 +25,9 @@
 		"vitest": "vitest",
 		"jest": "jest",
 		"test": "yarn nx run-many --target=test --all"
-	}
+	},
+	"nohoist": [
+		"**/react-native",
+		"**/react-native/**"
+	]
 }

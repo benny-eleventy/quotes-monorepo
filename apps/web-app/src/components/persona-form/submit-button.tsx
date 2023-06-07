@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { s } from "@bennyui/core";
 import {
 	setFormStatus,
@@ -17,6 +17,9 @@ const Submit = () => {
 	const dispatch = useDispatch();
 	const persona = usePersonaFormFields();
 	const queryClient = useQueryClient();
+
+	const theme = useTheme();
+	console.log(theme);
 
 	const { isSuccess, isError, isLoading } = useFormStatus();
 
@@ -140,7 +143,10 @@ const Submit = () => {
 
 	return (
 		<>
-			<SubmitButton onClick={() => handleSubmit()}>
+			<SubmitButton
+				onClick={() => handleSubmit()}
+				color={theme && theme.error_color}
+			>
 				{isLoading
 					? "Loading..."
 					: isSuccess
@@ -158,7 +164,7 @@ export default Submit;
 const SubmitButton = styled(s.Button)`
 	width: 80%;
 	border: 1px solid rgba(255, 255, 255, 0.4);
-	background: lightpink;
+	background: ${(props) => props.theme.color_100};
 	color: black;
 	padding: 1rem;
 `;

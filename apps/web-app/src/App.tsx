@@ -9,6 +9,7 @@ import { setApiDetails, setDataStatus } from "state";
 import Personas from "./components/personas";
 import { FlexStartRowContainer } from "@bennyui/core";
 import React from "react";
+import { useTheme } from "styled-components";
 
 function App() {
 	const { toastMessages } = useUiState();
@@ -52,11 +53,18 @@ function App() {
 		entity: "quotes",
 	});
 
+	const theme = useTheme();
+
 	return (
 		<>
-			<FlexStartRowContainer width="100%" height="auto">
+			<FlexStartRowContainer
+				width="90%"
+				height="auto"
+				padding="2rem"
+				backgroundColor={theme && theme.color_800}
+			>
 				<Personas />
-				{/* <PersonaForm /> */}
+				<PersonaForm />
 			</FlexStartRowContainer>
 			{toastMessages?.length > 0 && <ToastMessage />}
 		</>

@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: 16 # or other version you need
 
+      - name: Set Yarn Version
+        run: npm install --global yarn@3.4.1
+
       - name: Install Dependencies
         run: yarn install
 

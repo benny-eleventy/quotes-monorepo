@@ -10,7 +10,7 @@ describe("PersonaForm", () => {
 	it("renders input fields", async () => {
 		const { getByPlaceholderText, getByText } = render(<PersonaForm />);
 		expect(getByPlaceholderText("Name")).toBeInTheDocument();
-		expect(getByPlaceholderText("Image URL")).toBeInTheDocument();
+		expect(getByPlaceholderText("imageUrl")).toBeInTheDocument();
 		expect(getByPlaceholderText("Role")).toBeInTheDocument();
 
 		fireEvent.change(getByPlaceholderText("Name"), {

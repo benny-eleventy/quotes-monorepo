@@ -143,7 +143,7 @@ const Submit = () => {
 
 	return (
 		<>
-			<SubmitButton
+			<s.Button
 				onClick={() => handleSubmit()}
 				color={theme && theme.error_color}
 			>
@@ -154,7 +154,7 @@ const Submit = () => {
 					: isError
 					? "Error!"
 					: "Submit"}
-			</SubmitButton>
+			</s.Button>
 		</>
 	);
 };

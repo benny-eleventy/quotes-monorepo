@@ -10,6 +10,7 @@ import {
 } from "state";
 import { personaSchema } from "state";
 import InputBox from "../input-box";
+import Submit from "./submit-button";
 
 const PersonaForm = () => {
 	const dispatch = useDispatch();
@@ -78,6 +79,7 @@ const PersonaForm = () => {
 				isError={!!personaFormErrors.role}
 				errorMessage={personaFormErrors.role?.[0]}
 			/>
+			<Submit />
 		</FormWrapper>
 	);
 };

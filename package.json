@@ -13,7 +13,8 @@
 		"packages/*",
 		"shared/*",
 		"apps/web-app",
-		"apps/quotesApp"
+		"apps/quotesApp",
+		"apps/electron-app"
 	],
 	"dependencies": {
 		"jsdom": "^22.1.0",

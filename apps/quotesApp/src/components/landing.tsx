@@ -1,9 +1,8 @@
-import {ScrollView} from 'react-native';
-import React, {useEffect} from 'react';
-import {useGetAll} from 'hooks';
-import {useDispatch} from 'react-redux';
-import {setApiDetails, usePersonaGlobalState} from 'state';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
+import { useGetAll } from 'hooks';
+import { setApiDetails, usePersonaGlobalState } from 'state';
 
 const Landing = () => {
   const dispatch = useDispatch();
@@ -24,10 +23,9 @@ const Landing = () => {
     entity: 'personas',
   });
 
-  const {results} = usePersonaGlobalState();
-  console.log('Reactnative', results);
+  const { results } = usePersonaGlobalState();
   return (
-    <ScrollView>
+    <ThemedScrollView>
       {results.map((persona: any) => {
         return (
           <Card>
@@ -35,14 +33,14 @@ const Landing = () => {
           </Card>
         );
       })}
-    </ScrollView>
+    </ThemedScrollView>
   );
 };
 
-export {Landing};
+export { Landing };
 
 const Card = styled.View`
-  background-color: #a8dadc;
+  background-color: ${props => props.theme.color_100};
   padding: 20px;
   margin: 10px;
   border-radius: 10px;
@@ -57,4 +55,8 @@ const PersonaName = styled.Text`
   color: #1d3557;
   font-size: 20px;
   font-weight: bold;
+`;
+
+const ThemedScrollView = styled.ScrollView`
+  background-color: ${props => props.theme.color_900};
 `;

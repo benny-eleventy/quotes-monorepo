@@ -1,22 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { formReducer, updateField } from "./form-slice";
+import { initialState } from "./form-state";
 
 describe("formSlice", () => {
 	it("should handle initial state", () => {
-		expect(formReducer(undefined, { type: "" })).toEqual({
-			currentEntity: "none",
-			fields: {
-				persona: {
-					name: "",
-					imageUrls: [],
-					role: "Persona",
-				},
-				quotes: {
-					quote: "",
-					persona: "",
-				},
-			},
-		});
+		expect(formReducer(undefined, { type: "" })).toEqual(initialState);
 	});
 
 	it("should handle updateField for persona", () => {

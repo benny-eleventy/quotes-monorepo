@@ -1,15 +1,8 @@
-import { z } from "zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import styled, { useTheme } from "styled-components";
 import { s } from "@bennyui/core";
-import {
-	setFormStatus,
-	personaSchema,
-	setMultipleFieldErrors,
-	usePersonaFormFields,
-	useFormStatus,
-} from "state";
+import { setFormStatus, usePersonaFormFields, useFormStatus } from "state";
 import { useCreateOne, useUpdateOne } from "hooks";
 import { addToastMessage } from "../../state";
 
@@ -19,7 +12,6 @@ const Submit = () => {
 	const queryClient = useQueryClient();
 
 	const theme = useTheme();
-	console.log(theme);
 
 	const { isSuccess, isError, isLoading } = useFormStatus();
 
@@ -102,48 +94,16 @@ const Submit = () => {
 	});
 
 	const handleSubmit = async () => {
-		try {
-			// dispatch(setValidating(true));
-			dispatch(
-				setFormStatus({
-					isLoading: true,
-					isValidating: true,
-				})
-			);
-			const _persona = await personaSchema.parseAsync(persona);
-			if (persona._id) {
-				updateOne({ body: persona, entity: "persona", _id: persona._id });
-			} else {
-				createPesrona({ body: persona });
-			}
-		} catch (error) {
-			dispatch(setFormStatus({ isLoading: false }));
-
-			if (error instanceof z.ZodError) {
-				//TODO: handle zod errors
-				const errorMessages: Record<string, string[]> = {};
-				for (const issue of error.issues) {
-					const field = issue.path[0];
-					if (field) {
-						if (!errorMessages[field]) {
-							errorMessages[field] = [];
-						}
-						errorMessages[field].push(issue.message);
-					}
-				}
-				dispatch(
-					setMultipleFieldErrors({
-						entity: "persona",
-						errors: errorMessages,
-					})
-				);
-			}
+		if (persona._id) {
+			updateOne({ body: persona, entity: "persona", _id: persona._id });
+		} else {
+			createPesrona({ body: persona });
 		}
 	};
 
 	return (
 		<>
-			<s.Button
+			<SubmitButton
 				onClick={() => handleSubmit()}
 				color={theme && theme.error_color}
 			>
@@ -154,7 +114,7 @@ const Submit = () => {
 					: isError
 					? "Error!"
 					: "Submit"}
-			</s.Button>
+			</SubmitButton>
 		</>
 	);
 };

@@ -52,7 +52,7 @@ afterAll(() => server.close());
 test('displays "Success" text when API call is successful', async () => {
   const store = configureStore({ reducer: rootReducer });
 
-  const { getByText } = render(
+  const { getByText, getByPlaceholderText } = render(
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <PersonaForm />
@@ -60,8 +60,8 @@ test('displays "Success" text when API call is successful', async () => {
     </Provider>,
   );
 
-  //   fireEvent.change(getByPlaceholderText('Name'), '');
-  //   fireEvent.change(getByPlaceholderText('Role'), 'Persona');
+  fireEvent.changeText(getByPlaceholderText('Name'), 'success');
+  fireEvent.changeText(getByPlaceholderText('Role'), 'Persona');
 
   fireEvent.press(getByText('Submit'));
 

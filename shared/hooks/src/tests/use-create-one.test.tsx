@@ -51,14 +51,17 @@ test("useCreateOne performs the mutation and returns data", async () => {
 		</Provider>
 	);
 	const onCreateSuccess = jest.fn();
-	const { result } = renderHook(() => useCreateOne({ onCreateSuccess }), {
-		wrapper,
-	});
-
 	const entity = "persona"; // Replace this with a valid entity
+	const { result } = renderHook(
+		() => useCreateOne({ onCreateSuccess, entity }),
+		{
+			wrapper,
+		}
+	);
+
 	const body = { name: "John Doe", role: "Persona" }; // Replace this with valid data
 
-	act(() => result.current.createOne({ entity, body }));
+	act(() => result.current.createOne({ body }));
 
 	await waitFor(() => {
 		return result.current.isSuccess;
